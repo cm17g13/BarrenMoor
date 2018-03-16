@@ -25,7 +25,7 @@ public class RunnerClass {
 				play = false;
 				textHandler.youWon();
 			}
-			grid.printGrid();
+			//grid.printGrid(); for testing
 			textHandler.timeLeft(startTime);
 			
 		}		

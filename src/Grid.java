@@ -18,12 +18,6 @@ public class Grid {
 		//no print at 0 or 19
 		//from 10 to 18
 		//from 1 to 9
-		/*
-		this.playerX = rand.nextInt((dimensions/2) - 2) + (dimensions/2);
-		this.playerY = rand.nextInt((dimensions/2) - 2) + (dimensions/2);
-		this.treasureX = rand.nextInt((dimensions/2) - 2) + 1;
-		this.treasureY = rand.nextInt((dimensions/2) - 2) + 1;
-		*/
 		//So im played at 10, 10
 		//Treasure needs to spawn at least 5 away 
 		this.playerX = Math.floorDiv(dimensions, 2);
