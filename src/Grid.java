@@ -172,6 +172,12 @@ public class Grid {
 		grid[playerX][playerY] = "@";
 	}
 	
+	public void addLeafBlower() {
+		int x = 4;
+		int y = 4;
+		items.add(new LeafBlower(x, y, 2));
+	}
+	
 	public void setSightDistance(int sightDistance) {
 		this.sightDistance = sightDistance;
 	}

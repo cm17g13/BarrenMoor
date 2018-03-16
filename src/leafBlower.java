@@ -16,6 +16,12 @@ public class LeafBlower extends Item {
 	public void setSightDistance(int sightDistance) {
 		this.sightDistance = sightDistance;
 	}
+
+	@Override
+	public void pickUpItem() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 
 }

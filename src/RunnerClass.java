@@ -1,5 +1,3 @@
-import java.awt.event.KeyEvent;
-import java.util.Scanner;
 
 public class RunnerClass {
 	
@@ -15,7 +13,7 @@ public class RunnerClass {
 		
 		
 		boolean play = true;
-		Long startTime = System.nanoTime();
+		//Long startTime = System.nanoTime();
 		while(play) {
 			textHandler.whatDo();
 			String input = textHandler.readInput();
@@ -25,7 +23,7 @@ public class RunnerClass {
 				textHandler.youWon();
 			}
 			//grid.printGrid(); for testing
-			textHandler.timeLeft(startTime);
+			//textHandler.timeLeft(startTime);
 			
 		}		
 	}

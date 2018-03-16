@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class TextHandler {
 
 	private Scanner input;
-	private long startTime;
+	//private long startTime;
 
 	public TextHandler() {
 		input = new Scanner(System.in);

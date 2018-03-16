@@ -25,5 +25,6 @@ public abstract class Item {
 		this.y = y;
 	}
 	
+	public abstract void pickUpItem();
 	
 }

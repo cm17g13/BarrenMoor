@@ -5,4 +5,10 @@ public class Treasure extends Item {
 		super(x, y);
 	}
 
+	@Override
+	public void pickUpItem() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
