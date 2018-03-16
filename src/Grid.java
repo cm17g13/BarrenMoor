@@ -1,9 +1,12 @@
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Grid {
 	
 	private int dimensions;
 	private String[][] grid;
+	private ArrayList<Item> items;
+	private int sightDistance;
 	private int playerX;
 	private int playerY;
 	private int treasureX, treasureY;
@@ -13,8 +16,9 @@ public class Grid {
 	//Default constructor with no parameters
 	public Grid() {
 		this.dimensions = 20;
+		this.sightDistance = 1;
 		
-		//0 - 19
+		//Grid: 0 - 19
 		//no print at 0 or 19
 		//from 10 to 18
 		//from 1 to 9
@@ -56,9 +60,10 @@ public class Grid {
 	}
 	
 	//Custom constructor with given parameters
-	public Grid(String[][] grid, int dimensions, int playerX, int playerY, int treasureX, int treasureY) {
+	public Grid(String[][] grid, int dimensions,int sightDistance, int playerX, int playerY, int treasureX, int treasureY) {
 		
 		this.dimensions = dimensions;
+		this.sightDistance = sightDistance;
 		this.playerX = playerX;
 		this.playerY = playerY;
 		this.treasureX = treasureX;
@@ -151,11 +156,13 @@ public class Grid {
 	//i = 0, = player-1 
 	
 	public void removeFog() {
-		int sightDistance = 1;
 		for(int i = playerX-sightDistance; i <= playerX +sightDistance; i++) {
 			for(int j = playerY-sightDistance; j <= playerY+sightDistance; j++) {
 				if(i == treasureX && j == treasureY) {
 					grid[i][j] = "X"; //X marks the spot
+				} else if(i == dimensions) {
+					
+				
 				} else {
 					grid[i][j] = ".";
 				}
@@ -165,8 +172,13 @@ public class Grid {
 		grid[playerX][playerY] = "@";
 	}
 	
+	public void setSightDistance(int sightDistance) {
+		this.sightDistance = sightDistance;
+	}
+	
 	public void compass() {
-		System.out.println(Math.hypot(playerX - treasureX, playerY - treasureY));
+		System.out.printf("The dial reads: "+ "%.2f" + " Meters",  (float)Math.hypot(playerX - treasureX, playerY - treasureY));
+		System.out.println();
 	}
 	
 	public boolean foundTreasure() {
