@@ -1,5 +1,5 @@
 
-public class Player extends Positions {
+public class Player extends Item {
 
 	
 	

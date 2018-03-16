@@ -1,4 +1,4 @@
 
-public class Treasure extends Positions {
+public class Treasure extends Item {
 
 }
