@@ -2,11 +2,6 @@ Barren Moor
 Description
 Simple text adventure called "The adventure of the barren moor"
 
-System.out.println("           Welcome to           ");
-System.out.println("--------------------------------");
-System.out.println("The adventure of the barren moor");
-System.out.println("--------------------------------");
-
 In "The adventure of the barren moor" the player is in the middle of an infinite grey swamp. This grey swamp has few distinguishing characteristics, other than the fact that it is large and infinite and dreary. However, the player DOES have a magic compass that tells the player how far away the next feature of interest is.
 
 The player can go north,south,east,or west.

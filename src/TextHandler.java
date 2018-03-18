@@ -11,11 +11,11 @@ public class TextHandler {
 
 	public void printWelcome() {
 		System.out.println("           Welcome to           ");
-		System.out.println("--------------------------------");
+		System.out.println("---------------------------------");
 		System.out.println("The adventure of the barren moor");
-		System.out.println("--------------------------------");
+		System.out.println("---------------------------------");
 		System.out.println();
-		System.out.println("You awaken to find yourself in a barren moor.  Try \"look\"");
+		System.out.println("You awaken to find yourself in a barren moor.");
 	}
 
 	public String sanitisedInput() {
@@ -29,6 +29,7 @@ public class TextHandler {
 		System.out.println("Try \"north\",\"south\",\"east\",or \"west\"");
 		System.out.println("You notice a small watch-like device in your left hand.");
 		System.out.println("It has hands like a watch, but the hands don't seem to tell time.");
+		System.out.println("Try \"move\", \"compass\" or \"map\"");
 	}
 	
 	public void whatDo() {

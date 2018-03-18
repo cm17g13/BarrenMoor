@@ -4,13 +4,13 @@ public class RunnerClass {
 	public static void main(String[] args) {
 		
 		Grid grid = new Grid();
+		grid.addLeafBlower();
+		grid.removeFog();
 		grid.printGrid();
 		
 		TextHandler textHandler = new TextHandler();
 		textHandler.printWelcome();
 		textHandler.initialLook();
-		
-		
 		
 		boolean play = true;
 		//Long startTime = System.nanoTime();

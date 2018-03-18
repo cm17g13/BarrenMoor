@@ -7,8 +7,12 @@ public class Treasure extends Item {
 
 	@Override
 	public void pickUpItem() {
-		// TODO Auto-generated method stub
-		
+		System.out.println("You found the treasure");
+		System.out.println("You can stop playing now");
+	}
+	
+	public String icon() {
+		return "X";
 	}
 
 }

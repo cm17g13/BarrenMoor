@@ -17,10 +17,13 @@ public class LeafBlower extends Item {
 		this.sightDistance = sightDistance;
 	}
 
-	@Override
 	public void pickUpItem() {
-		// TODO Auto-generated method stub
-		
+		System.out.println("You found the leaf blower");
+		System.out.println("This lets you see further in the fog");
+	}
+
+	public String icon() {
+		return "~";
 	}
 	
 
