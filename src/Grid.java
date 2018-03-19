@@ -42,6 +42,7 @@ public class Grid {
 		 */
 		int[] locations = spawnItemLocation();
 		items.add(new Treasure(locations[0], locations[1]));
+		addItem("LeafBlower");
 
 
 		createGrid();
@@ -205,12 +206,6 @@ public class Grid {
 		}
 		return itemArr;
 	}
-
-	public void addLeafBlower() {
-		int x = 4;
-		int y = 4;
-		items.add(new LeafBlower(x, y, 2));
-	}
 	
 	public void addItem(String itemName) {
 		boolean sameLocation;
@@ -227,7 +222,7 @@ public class Grid {
 			}
 		} while (sameLocation);
 		if(itemName == "LeafBlower") {
-			items.add(new LeafBlower(locations[0], locations[1], this.sightDistance + 1));
+			items.add(new LeafBlower(locations[0], locations[1]));
 		} else if (itemName == "Treasure") {
 			items.add(new Treasure(locations[0], locations[1]));
 		}
@@ -247,7 +242,9 @@ public class Grid {
 			if (playerX == item.getX() && playerY == item.getY()) {
 				item.pickUpItem();
 				if(item instanceof LeafBlower) {
-					this.sightDistance =((LeafBlower) item).getSightDistance();
+					System.out.println("Old Sight distance: "+ sightDistance);
+					sightDistance = sightDistance + 1;
+					System.out.println("New Sight distance: "+ sightDistance);
 					removeItem(item);
 					addItem("LeafBlower");
 					removeFog();

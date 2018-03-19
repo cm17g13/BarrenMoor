@@ -4,14 +4,7 @@ public class RunnerClass {
 	public static void main(String[] args) {
 		
 		Grid grid = new Grid();
-		//grid.addLeafBlower();
-		grid.addItem("LeafBlower");
-		grid.addItem("LeafBlower");
-		grid.addItem("LeafBlower");
-		grid.addItem("LeafBlower");
-		grid.addItem("LeafBlower");
-		grid.addItem("LeafBlower");
-		grid.removeFog();
+		//grid.removeFog();
 		grid.printGrid();
 		
 		TextHandler textHandler = new TextHandler();

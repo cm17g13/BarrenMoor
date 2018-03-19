@@ -7,7 +7,7 @@ public class Treasure extends Item {
 
 	@Override
 	public void pickUpItem() {
-		System.out.println("You found the treasure");
+		System.out.println("You found The treasure");
 		System.out.println("You can stop playing now");
 	}
 	
