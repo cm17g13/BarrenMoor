@@ -4,8 +4,7 @@ public class RunnerClass {
 	public static void main(String[] args) {
 		
 		Grid grid = new Grid();
-		grid.addLeafBlower();
-		grid.removeFog();
+		//grid.removeFog();
 		grid.printGrid();
 		
 		TextHandler textHandler = new TextHandler();
@@ -18,16 +17,11 @@ public class RunnerClass {
 			textHandler.whatDo();
 			String input = textHandler.readInput();
 			grid  = pipeInput(input, grid);
-			if(grid.foundTreasure()) {
-				if(grid.foundSpade()) {
-					play = false;
-					textHandler.youWon();
-				} else {
-					textHandler.youAlmostWon();
-				}
-			} 
-			//grid.printGrid(); for testing
-			//textHandler.timeLeft(startTime);
+
+			if(grid.checkItem()) {
+				play = false;
+				textHandler.youWon();
+			}
 			
 		}		
 	}
@@ -44,8 +38,4 @@ public class RunnerClass {
 		}
 		return grid;
 	}
-	
-
-	
-
 }

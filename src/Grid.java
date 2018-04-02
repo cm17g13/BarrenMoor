@@ -6,6 +6,7 @@ public class Grid {
 	private int dimensions;
 	private String[][] grid;
 	private ArrayList<Item> items;
+	private boolean foundShovel = true;
 	private int sightDistance;
 	private int playerX, playerY;
 	// private int treasureX, treasureY;
@@ -26,7 +27,7 @@ public class Grid {
 		// Treasure needs to spawn at least 5 away
 		this.playerX = Math.floorDiv(dimensions, 2);
 		this.playerY = Math.floorDiv(dimensions, 2);
-		boolean sameLocation;
+		/*boolean sameLocation;
 		int[] locations;
 		do {
 			sameLocation = false;
@@ -39,46 +40,16 @@ public class Grid {
 				}
 			}
 		} while (sameLocation);
-
+		 */
+		int[] locations = spawnItemLocation();
 		items.add(new Treasure(locations[0], locations[1]));
+		addItem("Shovel");
+		addItem("LeafBlower");
 
-		// spawnTreasureRand();
 
 		createGrid();
 	}
-
-	/*
-	 * public int[] spawnTreasureRand() { this.playerX = rand.nextInt((dimensions/2)
-	 * - 2) + (dimensions/2); this.playerY = rand.nextInt((dimensions/2) - 2) +
-	 * (dimensions/2); this.treasureX = rand.nextInt((dimensions/2) - 2) + 1;
-	 * this.treasureY = rand.nextInt((dimensions/2) - 2) + 1; }
-	 */
-
-	public int[] spawnItemLocation() {
-		int itemX;
-		int itemY;
-
-		if (rand.nextBoolean()) {
-			if (rand.nextBoolean()) {
-				itemX = rand.nextInt(Math.floorDiv(dimensions, 4) - 1) + 1;
-				itemY = rand.nextInt(dimensions - 2) + 1;
-			} else {
-				itemX = rand.nextInt(Math.floorDiv(3 * dimensions, 4) - 1) + 1;
-				itemY = rand.nextInt(dimensions - 2) + 1;
-			}
-		} else {
-			if (rand.nextBoolean()) {
-				itemY = rand.nextInt(Math.floorDiv(dimensions, 4) - 1) + 1;
-				itemX = rand.nextInt(dimensions - 2) + 1;
-			} else {
-				itemY = rand.nextInt(Math.floorDiv(3 * dimensions, 4) - 1) + 1;
-				itemX = rand.nextInt(dimensions - 2) + 1;
-			}
-		}
-		int[] location = { itemX, itemY };
-		return location;
-	}
-
+	
 	// Custom constructor with given parameters
 	public Grid(String[][] grid, int dimensions, int sightDistance, int playerX, int playerY, int treasureX,
 			int treasureY) {
@@ -110,10 +81,34 @@ public class Grid {
 					 * else if(i == treasureX && j == treasureY) { value = "X"; }
 					 */
 				grid[i][j] = value;
-
 			}
 		}
 		removeFog();
+	}
+	
+	public int[] spawnItemLocation() {
+		int itemX;
+		int itemY;
+
+		if (rand.nextBoolean()) {
+			if (rand.nextBoolean()) {
+				itemX = rand.nextInt(Math.floorDiv(dimensions, 4) - 1) + 1;
+				itemY = rand.nextInt(dimensions - 2) + 1;
+			} else {
+				itemX = rand.nextInt(Math.floorDiv(3 * dimensions, 4) - 1) + 1;
+				itemY = rand.nextInt(dimensions - 2) + 1;
+			}
+		} else {
+			if (rand.nextBoolean()) {
+				itemY = rand.nextInt(Math.floorDiv(dimensions, 4) - 1) + 1;
+				itemX = rand.nextInt(dimensions - 2) + 1;
+			} else {
+				itemY = rand.nextInt(Math.floorDiv(3 * dimensions, 4) - 1) + 1;
+				itemX = rand.nextInt(dimensions - 2) + 1;
+			}
+		}
+		int[] location = { itemX, itemY };
+		return location;
 	}
 
 	public boolean move(String input) {
@@ -177,13 +172,18 @@ public class Grid {
 
 	public void removeFog() {
 		for (int i = playerX - sightDistance; i <= playerX + sightDistance; i++) {
+			if(i < 0 || i >= dimensions) {
+				 continue;
+			}
 			for (int j = playerY - sightDistance; j <= playerY + sightDistance; j++) {
+				if(j < 0 || j >= dimensions) {
+					 continue;
+				}
 				if (grid[i][j] == "#") {
 					grid[i][j] = "#";
 				} else {
 					grid[i][j] = ".";
 				}
-				
 				for (int z = 0; z < items.size(); z++) {
 					Item item = items.get(z);
 					if (i == item.getX() && j == item.getY()) {
@@ -208,29 +208,83 @@ public class Grid {
 		}
 		return itemArr;
 	}
-
-	public void addLeafBlower() {
-		int x = 4;
-		int y = 4;
-		items.add(new LeafBlower(x, y, 2));
+	
+	public void addItem(String itemName) {
+		boolean sameLocation;
+		int[] locations;
+		do {
+			sameLocation = false;
+			locations = spawnItemLocation();
+			if(!items.isEmpty()) {
+				for (Item item : items) {
+					if (item.getX() == locations[0] || item.getY() == locations[1]) {
+						sameLocation = true;
+					}
+				}
+			}
+		} while (sameLocation);
+		if(itemName == "LeafBlower") {
+			items.add(new LeafBlower(locations[0], locations[1]));
+		} else if (itemName == "Treasure") {
+			items.add(new Treasure(locations[0], locations[1]));
+		} else if(itemName == "Shovel") {
+			items.add(new Shovel(locations[0],  locations[1]));
+			foundShovel = false;
+		}
+		
+	}
+	
+	public void removeItem(Item i) {
+		items.remove(i);
 	}
 
 	public void setSightDistance(int sightDistance) {
 		this.sightDistance = sightDistance;
 	}
 
-	public void checkItem() {
+	public boolean checkItem() {
 		for (Item item : items) {
 			if (playerX == item.getX() && playerY == item.getY()) {
 				item.pickUpItem();
+				if(item instanceof LeafBlower) {
+					sightDistance = sightDistance + 1;
+					removeItem(item);
+					removeFog();
+					return false;
+				}
+				
+				if(item instanceof Shovel) {
+					removeItem(item);
+					removeFog();
+					this.foundShovel = true;
+					return false;
+				}
+				if(item instanceof Treasure) {
+					if(foundShovel) {
+						printGrid();
+						return true;
+					} else {
+						System.out.println("You still need to find the Shovel, to dig up the treasure");
+						return false;
+					}
+				}
 			}
 		}
+		return false;
 	}
 
 	public void compass() {
-		Treasure t = getTreasure();
-		System.out.printf("The dial reads: " + "%.2f" + " Meters",
-				(float) Math.hypot(playerX - t.getX(), playerY - t.getY()));
+		float closest = (float) dimensions;
+		Item closestItem = null;
+		for(Item item: items) {
+			float distance = (float) Math.hypot(playerX - item.getX(), playerY - item.getY());
+			if(distance  < closest) {
+				closest = distance;
+				closestItem = item;
+			}
+		
+		}
+		System.out.printf("The dial reads: " + "%.2f" + " Meters", (float) Math.hypot(playerX - closestItem.getX(), playerY - closestItem.getY()));
 		System.out.println();
 	}
 
@@ -242,7 +296,17 @@ public class Grid {
 		}
 		return null;
 	}
+	
+	public Treasure getLeafBlower() {
+		for (Item item : items) {
+			if (item instanceof LeafBlower) {
+				return (Treasure) item;
+			}
+		}
+		return null;
+	}
 
+	/*
 	public boolean foundTreasure() {
 		Treasure t = getTreasure();
 
@@ -250,7 +314,7 @@ public class Grid {
 			return true;
 		}
 		return false;
-	}
+	}*/
 
 	public void printGrid() {
 		for (int i = 0; i < dimensions; ++i) {

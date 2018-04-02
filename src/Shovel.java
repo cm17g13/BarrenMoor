@@ -1,7 +1,7 @@
 
 public class Shovel extends Item {
 	
-	public Shovel(int x, int y, int sightDistance) {
+	public Shovel(int x, int y) {
 		super(x, y);
 		
 	}
