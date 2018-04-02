@@ -19,9 +19,13 @@ public class RunnerClass {
 			String input = textHandler.readInput();
 			grid  = pipeInput(input, grid);
 			if(grid.foundTreasure()) {
-				play = false;
-				textHandler.youWon();
-			}
+				if(grid.foundSpade()) {
+					play = false;
+					textHandler.youWon();
+				} else {
+					textHandler.youAlmostWon();
+				}
+			} 
 			//grid.printGrid(); for testing
 			//textHandler.timeLeft(startTime);
 			

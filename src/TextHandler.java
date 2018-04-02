@@ -36,8 +36,13 @@ public class TextHandler {
 		System.out.println("What would you like to do?");
 	}
 	
-	public void youWon() {
+	public void youAlmostWon() {
 		System.out.println("Congratulations, you found the treaure");
+		System.out.println("However, you have not found a way to dig up the treasure");
+	}
+	
+	public void youWon() {
+		System.out.println("Congratulations, you found and dug up the treaure");
 	}
 	
 	public void timeLeft(Long start) {
