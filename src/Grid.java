@@ -242,7 +242,7 @@ public class Grid {
 		this.sightDistance = sightDistance;
 	}
 
-	public boolean checkItem() {
+	public boolean checkItem(TextHandler textHandler) {
 		for (Item item : items) {
 			if (playerX == item.getX() && playerY == item.getY()) {
 				item.pickUpItem();
@@ -262,9 +262,10 @@ public class Grid {
 				if(item instanceof Treasure) {
 					if(foundShovel) {
 						printGrid();
+						textHandler.youWon();
 						return true;
 					} else {
-						System.out.println("You still need to find the Shovel, to dig up the treasure");
+						textHandler.youAlmostWon();
 						return false;
 					}
 				}

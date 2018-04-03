@@ -24,7 +24,6 @@ public abstract class Item {
 	public void setY(int y) {
 		this.y = y;
 	}
-	public abstract String icon();
 	public abstract void pickUpItem();
-	
+	public abstract String icon();
 }

@@ -7,7 +7,6 @@ public class Treasure extends Item {
 
 	public void pickUpItem() {
 		System.out.println("You found The treasure");
-		System.out.println("You can stop playing now");
 	}
 	
 	public String icon() {

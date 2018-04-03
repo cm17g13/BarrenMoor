@@ -27,9 +27,15 @@ public class TextHandler {
 		System.out.println("reflected in the murky grey water which reaches up your shins.");
 		System.out.println("Some black plants barely poke out of the shallow water.");
 		System.out.println("Try \"north\",\"south\",\"east\",or \"west\"");
+		System.out.println("");
 		System.out.println("You notice a small watch-like device in your left hand.");
 		System.out.println("It has hands like a watch, but the hands don't seem to tell time.");
 		System.out.println("Try \"move\", \"compass\" or \"map\"");
+		System.out.println("");
+	}
+	
+	public void space() {
+		System.out.println("");
 	}
 	
 	public void whatDo() {
@@ -43,6 +49,7 @@ public class TextHandler {
 	
 	public void youWon() {
 		System.out.println("Congratulations, you found and dug up the treaure");
+		System.out.println("The game is over now");
 	}
 	
 	public void timeLeft(Long start) {

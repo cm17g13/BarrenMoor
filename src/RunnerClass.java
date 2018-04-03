@@ -14,13 +14,13 @@ public class RunnerClass {
 		boolean play = true;
 		//Long startTime = System.nanoTime();
 		while(play) {
+			textHandler.space();
 			textHandler.whatDo();
 			String input = textHandler.readInput();
 			grid  = pipeInput(input, grid);
 
-			if(grid.checkItem()) {
+			if(grid.checkItem(textHandler)) {
 				play = false;
-				textHandler.youWon();
 			}
 			
 		}		
