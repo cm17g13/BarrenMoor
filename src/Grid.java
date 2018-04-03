@@ -83,7 +83,7 @@ public class Grid {
 		}
 		removeFog();
 	}
-	
+
 	public int[] spawnItemLocation() {
 		int itemX;
 		int itemY;
