@@ -6,6 +6,7 @@ public class Grid {
 	private int dimensions;
 	private String[][] grid;
 	private ArrayList<Item> items;
+	private boolean foundShovel = true;
 	private int sightDistance;
 	private int playerX, playerY;
 	// private int treasureX, treasureY;
@@ -42,6 +43,7 @@ public class Grid {
 		 */
 		int[] locations = spawnItemLocation();
 		items.add(new Treasure(locations[0], locations[1]));
+		addItem("Shovel");
 		addItem("LeafBlower");
 
 
@@ -225,6 +227,9 @@ public class Grid {
 			items.add(new LeafBlower(locations[0], locations[1]));
 		} else if (itemName == "Treasure") {
 			items.add(new Treasure(locations[0], locations[1]));
+		} else if(itemName == "Shovel") {
+			items.add(new Shovel(locations[0],  locations[1]));
+			foundShovel = false;
 		}
 		
 	}
@@ -242,17 +247,26 @@ public class Grid {
 			if (playerX == item.getX() && playerY == item.getY()) {
 				item.pickUpItem();
 				if(item instanceof LeafBlower) {
-					System.out.println("Old Sight distance: "+ sightDistance);
 					sightDistance = sightDistance + 1;
-					System.out.println("New Sight distance: "+ sightDistance);
 					removeItem(item);
-					addItem("LeafBlower");
 					removeFog();
 					return false;
 				}
+				
+				if(item instanceof Shovel) {
+					removeItem(item);
+					removeFog();
+					this.foundShovel = true;
+					return false;
+				}
 				if(item instanceof Treasure) {
-					printGrid();
-					return true;
+					if(foundShovel) {
+						printGrid();
+						return true;
+					} else {
+						System.out.println("You still need to find the Shovel, to dig up the treasure");
+						return false;
+					}
 				}
 			}
 		}

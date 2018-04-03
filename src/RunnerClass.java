@@ -17,12 +17,11 @@ public class RunnerClass {
 			textHandler.whatDo();
 			String input = textHandler.readInput();
 			grid  = pipeInput(input, grid);
+
 			if(grid.checkItem()) {
 				play = false;
 				textHandler.youWon();
 			}
-			//grid.printGrid(); for testing
-			//textHandler.timeLeft(startTime);
 			
 		}		
 	}
