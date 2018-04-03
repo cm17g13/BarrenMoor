@@ -14,7 +14,7 @@ public class Grid {
 
 	// Default constructor with no parameters
 	public Grid() {
-		this.dimensions = 10;
+		this.dimensions = 40;
 		this.sightDistance = 1;
 		items = new ArrayList<Item>();
 
