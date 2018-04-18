@@ -298,24 +298,14 @@ public class Grid {
 		return null;
 	}
 	
-	public Treasure getLeafBlower() {
+	public LeafBlower getLeafBlower() {
 		for (Item item : items) {
 			if (item instanceof LeafBlower) {
-				return (Treasure) item;
+				return (LeafBlower) item;
 			}
 		}
 		return null;
 	}
-
-	/*
-	public boolean foundTreasure() {
-		Treasure t = getTreasure();
-
-		if (playerX == t.getX() && playerY == t.getY()) {
-			return true;
-		}
-		return false;
-	}*/
 
 	public void printGrid() {
 		for (int i = 0; i < dimensions; ++i) {
